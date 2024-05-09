@@ -135,7 +135,7 @@ const Navbar = () => {
             <li>
               <Link to="/companies">Companies</Link>
             </li>
-            {/* <li>
+            <li>
               <Link
                 to={
                   user?.accountType === "seeker"
@@ -147,7 +147,7 @@ const Navbar = () => {
                   ? "Applications"
                   : "Upload Job"}
               </Link>
-            </li> */}
+            </li>
             <li>
               <Link to="/about-us">About us</Link>
             </li>
