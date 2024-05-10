@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-const API_URL = "http://localhost:8800/api-v1";
-// const API_URL = "https://job-finder-app-gsem.onrender.com/api-v1";
+//const API_URL = "http://localhost:8800/api-v1";
+const API_URL = "https://job-finder-app-gsem.onrender.com/api-v1";
 export const API = axios.create({
   baseURL: API_URL,
   responseType: "json",
