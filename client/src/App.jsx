@@ -11,6 +11,8 @@ import {
   UserProfile,
 } from "./Pages";
 import { useSelector } from "react-redux";
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Layout() {
   const { user } = useSelector((state) => state.user);
@@ -54,6 +56,7 @@ function App() {
         <Route path="/user-auth" element={<AuthPage />} />
       </Routes>
       {user && <Footer />}
+      <ToastContainer />
     </main>
   );
 }

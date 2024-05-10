@@ -7,6 +7,8 @@ import { jobs } from "../utils/data.js";
 import { CustomButton, JobCard, Loading } from "../Components";
 import { useSelector } from "react-redux";
 import { apiRequest } from "../utils/index.js";
+import { Button, Modal } from "flowbite-react";
+import { toast } from "react-toastify";
 
 const JobDetail = () => {
   const { id } = useParams();
@@ -15,6 +17,7 @@ const JobDetail = () => {
   const [similarJobs, setSimilarJobs] = useState([]);
   const [selected, setSelected] = useState("0");
   const [isFetching, setIsFetching] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   const getJobDetails = async () => {
     setIsFetching(true);
@@ -55,6 +58,16 @@ const JobDetail = () => {
       console.log(error);
     }
   };
+
+  const handleClick = ()=>{
+    setOpenModal(true)
+    console.log("hello")
+  }
+
+  const handleSubmit = ()=>{
+    toast.success("You application submitted successfully !!")
+    setOpenModal(false)
+  }
   useEffect(() => {
     id && getJobDetails();
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
@@ -198,12 +211,34 @@ const JobDetail = () => {
                 outline-none rounded-full text-base`}
                 />
               ) : (
-                <CustomButton
-                  title="Apply Now"
-                  containerStyles={`w-full flex items-center 
-              justify-center text-white bg-black py-3 px-5 
-              outline-none rounded-full text-base`}
-                />
+                <>
+                  <CustomButton
+                    title="Apply Now"
+                    onClick={handleClick}
+                    containerStyles={`w-full flex items-center 
+                    justify-center text-white bg-black py-3 px-5 
+                    outline-none rounded-full text-base`}
+                    />
+                    <Modal show={openModal} onClose={() => setOpenModal(false)}  className="rounded-md w-1/2 mx-auto my-20">
+                    <Modal.Header 
+                    className="bg-gray-50 rounded-md ">{job?.jobTitle}</Modal.Header>
+                    <hr />
+                    <Modal.Body  className="bg-gray-50">
+                      <div className="space-y-6">
+                        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                        {job?.detail[0]?.desc}
+                        </p>
+                      </div>
+                    </Modal.Body>
+                    <Modal.Footer  className="bg-gray-50 flex space-x-4 rounded-md border border-t-0">
+                      <Button className="bg-black text-white" onClick={handleSubmit}>Submit</Button>
+                      <Button className="bg-black text-white"  onClick={() => setOpenModal(false)}>
+                        Decline
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
+                
+                  </>
               )}
             </div>
           </div>
