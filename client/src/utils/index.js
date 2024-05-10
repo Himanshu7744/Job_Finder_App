@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 const API_URL = "http://localhost:8800/api-v1";
 // const API_URL = "https://job-finder-app-gsem.onrender.com/api-v1";
 export const API = axios.create({
@@ -82,3 +83,18 @@ export const updateURL = ({
 
   return newURL;
 };
+
+export const application = async(company,user,jobTitle)=>{
+  const apply = await API("/companies/applynow", {
+    method: "POST",
+    data : {company,
+    user,
+    jobTitle,},
+    headers: {
+      "content-type": "application/json",
+    },
+  });
+  console.log(apply)
+  toast.success("Success")
+  return apply.data.message;
+}

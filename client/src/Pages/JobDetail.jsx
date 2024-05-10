@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { jobs } from "../utils/data.js";
 import { CustomButton, JobCard, Loading } from "../Components";
 import { useSelector } from "react-redux";
-import { apiRequest } from "../utils/index.js";
+import { apiRequest, application } from "../utils/index.js";
 import { Button, Modal } from "flowbite-react";
 import { toast } from "react-toastify";
 
@@ -65,7 +65,8 @@ const JobDetail = () => {
   }
 
   const handleSubmit = ()=>{
-    toast.success("You application submitted successfully !!")
+    const res = application(id,user._id,job?.jobTitle)
+    toast.success(res)
     setOpenModal(false)
   }
   useEffect(() => {

@@ -10,6 +10,7 @@ import {
   updateCompanyProfile,
 } from "../controllers/companiesController.js";
 import userAuth from "../middlewares/authMiddleware.js";
+import { apply } from "../controllers/apply.js";
 
 const router = express.Router();
 
@@ -35,5 +36,9 @@ router.get("/get-company/:id", getCompanyById);
 
 // UPDATE DATA
 router.put("/update-company", userAuth, updateCompanyProfile);
+
+
+// Apply wala...
+router.post("/applynow",apply);
 
 export default router;
